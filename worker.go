@@ -1,6 +1,9 @@
 package workers
 
-import "sync"
+import (
+	"sync"
+	"errors"
+)
 
 type WorkersPool struct {
 	Size int
@@ -20,6 +23,7 @@ func (this *WorkersPool) GetOneWorker() error{
 		defer this.Mu.Unlock()
 		this.WG.Add(1)
 	}
+	return nil
 }
 
 func (this *WorkersPool) ReleaseOneWorker() {
